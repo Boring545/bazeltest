@@ -1,1 +1,1 @@
-bazel build //src/summation:executable 
+bazel build :executable 
