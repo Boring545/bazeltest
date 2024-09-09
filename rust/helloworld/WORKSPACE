@@ -1,0 +1,19 @@
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+http_archive(
+    name = "rules_rust",
+    integrity = "sha256-Sgjd3TuTBW4s653HutmFp7MMtscr3w94IBuJCn6PRA0=",
+    urls = ["https://github.com/Boring545/rules_rust/releases/download/0.49.3/rules_rust-v0.49.3.tar.gz"],
+)
+
+#What to load and run to setup rust are documented at https://bazelbuild.github.io/rules_rust/
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+
+rules_rust_dependencies()
+
+rust_register_toolchains(
+    versions = ["1.70.0"],  # 替换为你要使用的 Rust 版本
+    extra_target_triples = ["riscv64-unknown-linux-gnu"],
+    register_toolchains = True,
+)
+
