@@ -34,6 +34,7 @@ py_binary(
 ```bash
 bazel --batch build //:hello
 ```
+这里也可以把build换成run，这样会执行build，然后执行这个文件
 
 ## 构建输出
 
