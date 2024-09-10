@@ -1,7 +1,6 @@
-
 ## 项目结构
 
-本项目展示了如何使用 Bazel 构建一个 Python 程序，并配置 `WORKSPACE` 文件来引入 `rules_python` 规则，并且使用本地安装的python解释器。
+本项目展示了如何使用 Bazel 构建一个 Python 程序，并配置 `WORKSPACE` 文件来引入 `rules_python` 规则，并且使用本地安装的 Python 解释器。
 
 - **`BUILD`**: Bazel 构建配置文件。
 - **`WORKSPACE`**: Bazel 工作区配置文件。
@@ -24,10 +23,9 @@ py_binary(
   - **`srcs`**: 源文件列表，这里包含 `hello.py`。
   - **`deps`**: 依赖项列表，这里为空，表示没有额外的依赖。
 
-##注意要点 ！！！！！！！！！！
-1.在WORKSPACE中将类似于 python_interpreter_target = "@python39_host//:python" 的内容, 替换为python_interpreter = "/usr/bin/python3"
-2.删除类似于load("@python3_10//:defs.bzl", "interpreter")的内容
-
+## 注意要点
+1. 在 `WORKSPACE` 中，将类似 `python_interpreter_target = "@python39_host//:python"` 的内容替换为 `python_interpreter = "/usr/bin/python3"`。
+2. 删除类似 `load("@python3_10//:defs.bzl", "interpreter")` 的内容。
 
 ## 执行构建
 
@@ -44,9 +42,9 @@ bazel --batch build //:hello
 ```bash
 bazel-bin/hello
 ```
+
 构建并运行后，终端应显示：
 
 ```
 Hello, Bazel!
 ```
-
