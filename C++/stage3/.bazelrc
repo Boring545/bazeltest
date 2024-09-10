@@ -1,0 +1,7 @@
+common --enable_platform_specific_config
+
+# 下面这一句使得在linux环境下构建时，会避免使用本地的C工具链
+#build:linux --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+build:linux --incompatible_strict_action_env=true
+# Enable the CC toolchain resolution based on platforms.
+build:linux --incompatible_enable_cc_toolchain_resolution
