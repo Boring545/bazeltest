@@ -1,7 +1,12 @@
-# Go Rules Tutorial
-首先一般在WORKSPACE里找到加载go规则的地方，替换我修改的go规则
-然后找到go_register_toolchains这个函数，修改参数为version = "host"，即使用本地的go，当然，这需要在本地提前安装好riscv可用的go
-```
+# Go Rules 教程
+
+首先，在 `WORKSPACE` 文件中找到加载 Go 规则的部分，然后替换为修改后的 Go 规则。
+
+接着，找到 `go_register_toolchains` 函数，并将参数修改为 `version = "host"`，即使用本地安装的 Go 编译器。当然，这要求本地已经安装了 RISC-V 可用的 Go 编译器。
+
+以下是修改后的 `WORKSPACE` 配置：
+
+```python
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
@@ -12,9 +17,25 @@ http_archive(
     ],
 )
 
-#load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
-#go_rules_dependencies()
+go_rules_dependencies()
 
 go_register_toolchains(version = "host")
 ```
+
+## 构建步骤
+
+在当前目录下，可以执行以下命令来构建所有内容：
+
+```bash
+bazelisk build //...
+```
+
+接着，运行以下命令来运行项目：
+
+```bash
+bazelisk run //:basic-gazelle
+```
+
+更多详细信息，请参考 [Bazel Go Rules 教程](https://bazel-contrib.github.io/SIG-rules-authors/go-tutorial.html)。
