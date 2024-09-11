@@ -1,0 +1,72 @@
+[zjq@openeuler-riscv-4-4 envoy-1.26.4]$ bazel build -c opt --workspace_status_command= --verbose_failures envoy
+DEBUG: Rule 'com_github_luajit_luajit' indicated that a canonical reproducible form can be obtained by modifying arguments sha256 = "57ad1e3737c18a0ba7f447239449caa9cf4901e8881479475445252148b8fe34"
+DEBUG: Repository com_github_luajit_luajit instantiated at:
+  /home/zjq/build_factory/envoy/envoy-1.26.4/WORKSPACE:13:19: in <toplevel>
+  /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/repositories.bzl:275:30: in envoy_dependencies
+  /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/repositories.bzl:1177:26: in _com_github_luajit_luajit
+  /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/repositories.bzl:30:23: in external_http_archive
+  /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/envoy_api/bazel/envoy_http_archive.bzl:16:17: in envoy_http_archive
+Repository rule http_archive defined at:
+  /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/bazel_tools/tools/build_defs/repo/http.bzl:372:31: in <toplevel>
+INFO: Analyzed target //:envoy (77 packages loaded, 5034 targets configured).
+INFO: Found 1 target...
+ERROR: /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/envoy/bazel/foreign_cc/BUILD:79:15: Foreign Cc - Configure: Building luajit failed: (Exit 127): bash failed: error executing command (from target @envoy//bazel/foreign_cc:luajit)
+  (cd /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy && \
+  exec env - \
+    BAZEL_LINKLIBS=-l%:libstdc++.a \
+    BAZEL_LINKOPTS=-lm \
+    CC=/usr/local/bin/gcc \
+    CXX=/usr/local/bin/g++ \
+    PATH=/home/zjq/riscv_istio_test/go_golang/go/bin:/home/zjq/riscv_istio_test/go_golang/golang/bin:/home/zjq/.cargo/bin:/home/zjq/.wasmtime/bin:/home/zjq/local/bazel/bin:/home/zjq/.local/bin:/home/zjq/bin:/home/zjq/.cabal/bin:/home/zjq/build_factory/GHC/cabal/cabal2/cabal/_build/bin:/usr/local/bin:/usr/bin \
+  /bin/bash -c bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/wrapper_build_script.sh)
+# Configuration: 7fb4716ff98aaa0017718dbf6b896cd523aa39e5ffd21c6d83efc32c4a8c4f7d
+# Execution platform: @local_config_platform//:host
+
+Use --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging
+rules_foreign_cc: Build failed!
+rules_foreign_cc: Keeping temp build directory and dependencies directory for debug.
+rules_foreign_cc: Please note that the directories inside a sandbox are still cleaned unless you specify --sandbox_debug Bazel command line flag.
+rules_foreign_cc: Printing build logs:
+_____ BEGIN BUILD LOGS _____
+
+Bazel external C/C++ Rules. Building library luajit
+
+Environment:______________
+BUILD_SCRIPT=bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/build_script.sh
+EXT_BUILD_ROOT=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy
+BUILD_LOG=bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/Configure.log
+PWD=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy
+CXX=/usr/local/bin/g++
+BUILD_WRAPPER_SCRIPT=bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/wrapper_build_script.sh
+BAZEL_LINKOPTS=-lm
+TMPDIR=/tmp
+EXT_BUILD_DEPS=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit.ext_build_deps
+BAZEL_LINKLIBS=-l%:libstdc++.a
+BUILD_TMPDIR=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit.build_tmpdir
+SHLVL=2
+INSTALLDIR=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit
+PATH=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy:/home/zjq/riscv_istio_test/go_golang/go/bin:/home/zjq/riscv_istio_test/go_golang/golang/bin:/home/zjq/.cargo/bin:/home/zjq/.wasmtime/bin:/home/zjq/local/bazel/bin:/home/zjq/.local/bin:/home/zjq/bin:/home/zjq/.cabal/bin:/home/zjq/build_factory/GHC/cabal/cabal2/cabal/_build/bin:/usr/local/bin:/usr/bin
+CC=/usr/local/bin/gcc
+_=/usr/bin/env
+__________________________
++ mkdir -p /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit.build_tmpdir/luajit
++ ARFLAGS=rcsD
++ ASFLAGS='-U_FORTIFY_SOURCE -fstack-protector -Wall -Wunused-but-set-parameter -Wno-free-nonheap-object -fno-omit-frame-pointer -g0 -O2 -D_FORTIFY_SOURCE=1 -DNDEBUG -ffunction-sections -fdata-sections -fno-canonical-system-headers -Wno-builtin-macro-redefined -D__DATE__=redacted -D__TIMESTAMP__=redacted -D__TIME__=redacted -DABSL_MIN_LOG_LEVEL=4 -fPIC -Wno-deprecated-declarations -fexceptions'
++ CFLAGS='-U_FORTIFY_SOURCE -fstack-protector -Wall -Wunused-but-set-parameter -Wno-free-nonheap-object -fno-omit-frame-pointer -g0 -O2 -D_FORTIFY_SOURCE=1 -DNDEBUG -ffunction-sections -fdata-sections -fno-canonical-system-headers -Wno-builtin-macro-redefined -D__DATE__=redacted -D__TIMESTAMP__=redacted -D__TIME__=redacted -DABSL_MIN_LOG_LEVEL=4 -fPIC -Wno-deprecated-declarations -fexceptions'
++ CXXFLAGS='-U_FORTIFY_SOURCE -fstack-protector -Wall -Wunused-but-set-parameter -Wno-free-nonheap-object -fno-omit-frame-pointer -g0 -O2 -D_FORTIFY_SOURCE=1 -DNDEBUG -ffunction-sections -fdata-sections -std=c++14 -fno-canonical-system-headers -Wno-builtin-macro-redefined -D__DATE__=redacted -D__TIMESTAMP__=redacted -D__TIME__=redacted -DABSL_MIN_LOG_LEVEL=4 -fPIC -Wno-deprecated-declarations -std=c++17'
++ LDFLAGS='-Wl,--gdb-index -Wl,-no-as-needed -Wl,-z,relro,-z,now -B/usr/local/bin -B/usr/bin -pass-exit-codes -lm -Wl,--gc-sections -l:libstdc++.a'
++ AR=/usr/bin/ar
++ CC=/usr/local/bin/gcc
++ CXX=/usr/local/bin/gcc
++ CPPFLAGS=
++ /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/external/com_github_luajit_luajit/build.py --prefix=/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit.build_tmpdir/luajit
+bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/build_script.sh: line 59: /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/sandbox/linux-sandbox/546/execroot/envoy/external/com_github_luajit_luajit/build.py: No such file or directory
+_____ END BUILD LOGS _____
+rules_foreign_cc: Build wrapper script location: bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/wrapper_build_script.sh
+rules_foreign_cc: Build script location: bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/build_script.sh
+rules_foreign_cc: Build log location: bazel-out/riscv64-opt/bin/external/envoy/bazel/foreign_cc/luajit_foreign_cc/Configure.log
+
+Target //source/exe:envoy-static failed to build
+INFO: Elapsed time: 23.620s, Critical Path: 2.80s
+INFO: 84 processes: 81 internal, 3 linux-sandbox.
+FAILED: Build did NOT complete successfully
