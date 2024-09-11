@@ -1,0 +1,228 @@
+[zjq@openeuler-riscv-4-4 envoy-1.26.4]$ bazel build -c opt --workspace_status_command= --verbose_failures envoy
+INFO: Repository com_github_luajit_luajit instantiated at:
+  /home/zjq/build_factory/envoy/envoy-1.26.4/WORKSPACE:13:19: in <toplevel>
+  /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/repositories.bzl:275:30: in envoy_dependencies
+  /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/repositories.bzl:1177:26: in _com_github_luajit_luajit
+  /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/repositories.bzl:30:23: in external_http_archive
+  /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/envoy_api/bazel/envoy_http_archive.bzl:16:17: in envoy_http_archive
+Repository rule http_archive defined at:
+  /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/bazel_tools/tools/build_defs/repo/http.bzl:372:31: in <toplevel>
+INFO: repository @com_github_luajit_luajit' used the following cache hits instead of downloading the corresponding file.
+ * Hash '57ad1e3737c18a0ba7f447239449caa9cf4901e8881479475445252148b8fe34' for https://github.com/Boring545/LuaJIT/archive/2.1.0.tar.gz
+If the definition of 'repository @com_github_luajit_luajit' was updated, verify that the hashes were also updated.
+ERROR: An error occurred during the fetch of repository 'com_github_luajit_luajit':
+   Traceback (most recent call last):
+        File "/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/bazel_tools/tools/build_defs/repo/http.bzl", line 143, column 10, in _http_archive_impl
+                patch(ctx, auth = auth)
+        File "/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/bazel_tools/tools/build_defs/repo/utils.bzl", line 167, column 22, in patch
+                ctx.patch(patchfile, strip)
+Error in patch: Error applying patch /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/foreign_cc/luajit.patch: Incorrect Chunk: the chunk content doesn't match the target
+**Original Position**: 75
+
+**Original Content**:
+
+@if "%1" neq "debug" goto :NODEBUG
+@shift
+@set BUILDTYPE=debug
+@set LJCOMPILE=%LJCOMPILE% /Zi %DEBUGCFLAGS%
+@set LJLINK=%LJLINK% /opt:ref /opt:icf /incremental:no
+:NODEBUG
+@set LJLINK=%LJLINK% /%BUILDTYPE%
+@if "%1"=="amalg" goto :AMALGDLL
+@if "%1"=="static" goto :STATIC
+%LJCOMPILE% /MD /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:STATIC
+%LJCOMPILE% lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLIB% /OUT:%LJLIBNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:AMALGDLL
+%LJCOMPILE% /MD /DLUA_BUILD_AS_DLL ljamalg.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+@if errorlevel 1 goto :BAD
+
+**Revised Content**:
+
+@if "%1" neq "debug" goto :NODEBUG
+@shift
+@set LJCOMPILE=%LJCOMPILE% /O0 /Z7
+@set LJLINK=%LJLINK% /debug /opt:ref /opt:icf /incremental:no
+@set LJCRTDBG=d
+@goto :ENDDEBUG
+:NODEBUG
+@set LJCOMPILE=%LJCOMPILE% /O2 /Z7
+@set LJLINK=%LJLINK% /release /incremental:no
+@set LJCRTDBG=
+:ENDDEBUG
+@if "%1"=="amalg" goto :AMALGDLL
+@if "%1"=="static" goto :STATIC
+@set LJCOMPILE=%LJCOMPILE% /MD%LJCRTDBG%
+%LJCOMPILE% /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:STATIC
+@shift
+@set LJCOMPILE=%LJCOMPILE% /MT%LJCRTDBG%
+%LJCOMPILE% lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLIB% /OUT:%LJLIBNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:AMALGDLL
+@shift
+@set LJCOMPILE=%LJCOMPILE% /MD%LJCRTDBG%
+%LJCOMPILE% /DLUA_BUILD_AS_DLL ljamalg.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+@if errorlevel 1 goto :BAD
+ERROR: /home/zjq/build_factory/envoy/envoy-1.26.4/WORKSPACE:13:19: fetching http_archive rule //external:com_github_luajit_luajit: Traceback (most recent call last):
+        File "/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/bazel_tools/tools/build_defs/repo/http.bzl", line 143, column 10, in _http_archive_impl
+                patch(ctx, auth = auth)
+        File "/home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/bazel_tools/tools/build_defs/repo/utils.bzl", line 167, column 22, in patch
+                ctx.patch(patchfile, strip)
+Error in patch: Error applying patch /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/foreign_cc/luajit.patch: Incorrect Chunk: the chunk content doesn't match the target
+**Original Position**: 75
+
+**Original Content**:
+
+@if "%1" neq "debug" goto :NODEBUG
+@shift
+@set BUILDTYPE=debug
+@set LJCOMPILE=%LJCOMPILE% /Zi %DEBUGCFLAGS%
+@set LJLINK=%LJLINK% /opt:ref /opt:icf /incremental:no
+:NODEBUG
+@set LJLINK=%LJLINK% /%BUILDTYPE%
+@if "%1"=="amalg" goto :AMALGDLL
+@if "%1"=="static" goto :STATIC
+%LJCOMPILE% /MD /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:STATIC
+%LJCOMPILE% lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLIB% /OUT:%LJLIBNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:AMALGDLL
+%LJCOMPILE% /MD /DLUA_BUILD_AS_DLL ljamalg.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+@if errorlevel 1 goto :BAD
+
+**Revised Content**:
+
+@if "%1" neq "debug" goto :NODEBUG
+@shift
+@set LJCOMPILE=%LJCOMPILE% /O0 /Z7
+@set LJLINK=%LJLINK% /debug /opt:ref /opt:icf /incremental:no
+@set LJCRTDBG=d
+@goto :ENDDEBUG
+:NODEBUG
+@set LJCOMPILE=%LJCOMPILE% /O2 /Z7
+@set LJLINK=%LJLINK% /release /incremental:no
+@set LJCRTDBG=
+:ENDDEBUG
+@if "%1"=="amalg" goto :AMALGDLL
+@if "%1"=="static" goto :STATIC
+@set LJCOMPILE=%LJCOMPILE% /MD%LJCRTDBG%
+%LJCOMPILE% /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:STATIC
+@shift
+@set LJCOMPILE=%LJCOMPILE% /MT%LJCRTDBG%
+%LJCOMPILE% lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLIB% /OUT:%LJLIBNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:AMALGDLL
+@shift
+@set LJCOMPILE=%LJCOMPILE% /MD%LJCRTDBG%
+%LJCOMPILE% /DLUA_BUILD_AS_DLL ljamalg.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+@if errorlevel 1 goto :BAD
+ERROR: /home/zjq/.cache/bazel/_bazel_zjq/ce2d960f2051ba39ca8054ce19936793/external/envoy/bazel/foreign_cc/BUILD:79:15: @envoy//bazel/foreign_cc:luajit depends on @com_github_luajit_luajit//:all in repository @com_github_luajit_luajit which failed to fetch. no such package '@com_github_luajit_luajit//': Error applying patch /home/zjq/build_factory/envoy/envoy-1.26.4/bazel/foreign_cc/luajit.patch: Incorrect Chunk: the chunk content doesn't match the target
+**Original Position**: 75
+
+**Original Content**:
+
+@if "%1" neq "debug" goto :NODEBUG
+@shift
+@set BUILDTYPE=debug
+@set LJCOMPILE=%LJCOMPILE% /Zi %DEBUGCFLAGS%
+@set LJLINK=%LJLINK% /opt:ref /opt:icf /incremental:no
+:NODEBUG
+@set LJLINK=%LJLINK% /%BUILDTYPE%
+@if "%1"=="amalg" goto :AMALGDLL
+@if "%1"=="static" goto :STATIC
+%LJCOMPILE% /MD /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:STATIC
+%LJCOMPILE% lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLIB% /OUT:%LJLIBNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:AMALGDLL
+%LJCOMPILE% /MD /DLUA_BUILD_AS_DLL ljamalg.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+@if errorlevel 1 goto :BAD
+
+**Revised Content**:
+
+@if "%1" neq "debug" goto :NODEBUG
+@shift
+@set LJCOMPILE=%LJCOMPILE% /O0 /Z7
+@set LJLINK=%LJLINK% /debug /opt:ref /opt:icf /incremental:no
+@set LJCRTDBG=d
+@goto :ENDDEBUG
+:NODEBUG
+@set LJCOMPILE=%LJCOMPILE% /O2 /Z7
+@set LJLINK=%LJLINK% /release /incremental:no
+@set LJCRTDBG=
+:ENDDEBUG
+@if "%1"=="amalg" goto :AMALGDLL
+@if "%1"=="static" goto :STATIC
+@set LJCOMPILE=%LJCOMPILE% /MD%LJCRTDBG%
+%LJCOMPILE% /DLUA_BUILD_AS_DLL lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:STATIC
+@shift
+@set LJCOMPILE=%LJCOMPILE% /MT%LJCRTDBG%
+%LJCOMPILE% lj_*.c lib_*.c
+@if errorlevel 1 goto :BAD
+%LJLIB% /OUT:%LJLIBNAME% lj_*.obj lib_*.obj
+@if errorlevel 1 goto :BAD
+@goto :MTDLL
+:AMALGDLL
+@shift
+@set LJCOMPILE=%LJCOMPILE% /MD%LJCRTDBG%
+%LJCOMPILE% /DLUA_BUILD_AS_DLL ljamalg.c
+@if errorlevel 1 goto :BAD
+%LJLINK% /DLL /out:%LJDLLNAME% ljamalg.obj lj_vm.obj
+@if errorlevel 1 goto :BAD
+ERROR: Analysis of target '//:envoy' failed; build aborted:
+INFO: Elapsed time: 10.525s
+INFO: 0 processes.
+FAILED: Build did NOT complete successfully (371 packages loaded, 4109 targets configured)
